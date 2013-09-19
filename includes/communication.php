@@ -118,6 +118,25 @@ function oa_social_login_callback ()
 						$user_login = $user_full_name;
 					}
 
+					//Organisation
+					if (!empty ($identity->organizations))
+					{
+
+						// foreach($identity->organizations as $key -> $org) {
+
+						// 	if (!empty ($identity->organizations[$key]->title))
+						// 	{
+						// 		$user_title = " at " . $identity->organizations[0]->title;
+						// 	}
+
+						// 	$user_org .= $identity->organizations[$key]->name . $user_title;
+
+						// 	}
+
+						$user_org = json_encode($identity->organizations);
+
+					}
+
 					//New user created?
 					$new_registration = false;
 
@@ -209,7 +228,8 @@ function oa_social_login_callback ()
 							'first_name' => $user_first_name,
 							'last_name' => $user_last_name,
 							'user_url' => $user_website,
-							'user_pass' => $user_password
+							'user_pass' => $user_password,
+							'description' => $user_org
 						);
 
 						// Create a new user
